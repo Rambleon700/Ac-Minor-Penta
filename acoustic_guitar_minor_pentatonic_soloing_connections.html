@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acoustic Guitar Minor Pentatonic Soloing Masterclass</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #090D16;
+      color: #E2E8F0;
+      user-select: none;
+    }
+
+    .font-serif-heading {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0F172A;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Fretboard Wood Finishes */
+    .fretboard-rosewood {
+      background: linear-gradient(180deg, #180D09 0%, #28160F 50%, #150B07 100%);
+      border-top: 3px solid #D97706;
+      border-bottom: 3px solid #D97706;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.85);
+    }
+    
+    .fretboard-maple {
+      background: linear-gradient(180deg, #DEBA81 0%, #EED5A5 50%, #C9A267 100%);
+      border-top: 3px solid #78350F;
+      border-bottom: 3px solid #78350F;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.25);
+    }
+
+    .fretboard-ebony {
+      background: linear-gradient(180deg, #09090B 0%, #17171C 50%, #050507 100%);
+      border-top: 3px solid #94A3B8;
+      border-bottom: 3px solid #94A3B8;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.95);
+    }
+
+    /* String styling */
+    .string-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, #E2E8F0 0%, #94A3B8 50%, #64748B 100%);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.7);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .string-wound {
+      background: linear-gradient(180deg, #D97706 0%, #B45309 50%, #78350F 100%);
+    }
+
+    /* Vibrating String Animation */
+    @keyframes stringVibrate {
+      0% { transform: translateY(0); }
+      20% { transform: translateY(-2px); }
+      40% { transform: translateY(2px); }
+      60% { transform: translateY(-1px); }
+      80% { transform: translateY(1px); }
+      100% { transform: translateY(0); }
+    }
+    .vibrating {
+      animation: stringVibrate 0.18s infinite ease-in-out;
+    }
+
+    /* Fret lines & Nut */
+    .fret-wire {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(90deg, #64748B 0%, #F8FAFC 50%, #475569 100%);
+      box-shadow: 1px 0 3px rgba(0,0,0,0.6);
+      z-index: 5;
+    }
+    
+    .nut-wire {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 12px;
+      background: linear-gradient(90deg, #F8FAFC 0%, #CBD5E1 70%, #94A3B8 100%);
+      border-right: 2px solid #334155;
+      z-index: 6;
+    }
+
+    /* Fret Markers */
+    .fret-marker {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #FFFFFF 20%, #E2E8F0 60%, #94A3B8 100%);
+      opacity: 0.7;
+      box-shadow: 0 0 6px rgba(255,255,255,0.5);
+      z-index: 2;
+    }
+
+    /* Note Badges */
+    .note-badge {
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease;
+      z-index: 20;
+    }
+    
+    .note-badge:hover {
+      transform: scale(1.3) translate(-38%, -38%) !important;
+      z-index: 40;
+    }
+
+    .note-badge.active-played {
+      transform: scale(1.45) translate(-34%, -34%) !important;
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.95), 0 0 8px rgba(245, 158, 11, 0.8) !important;
+    }
+
+    /* Animated Connection Overlay SVG Lines */
+    @keyframes dashPulse {
+      to {
+        stroke-dashoffset: -20;
+      }
+    }
+    .slide-connection-line {
+      stroke-dasharray: 6, 4;
+      animation: dashPulse 1s linear infinite;
+    }
+
+    .target-anchor-pulse {
+      animation: anchorPulse 1.8s ease-in-out infinite alternate;
+    }
+    @keyframes anchorPulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.25); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-950 text-slate-100">
+
+  <!-- Application Header -->
+  <header class="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Brand Logo & Title -->
+      <div class="flex items-center space-x-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-slate-950 shadow-lg shadow-amber-600/20 font-extrabold text-2xl">
+          🎸
+        </div>
+        <div>
+          <h1 class="text-lg font-bold font-serif-heading text-amber-400 tracking-wide leading-tight">
+            Acoustic Pentatonic Masterclass
+          </h1>
+          <p class="text-xs text-slate-400">Soloing Connections & CAGED Box Systems Across All 12 Keys</p>
+        </div>
+      </div>
+
+      <!-- Controls: Tuning, Key, Scale & Theme -->
+      <div class="flex flex-wrap items-center gap-2 text-xs bg-slate-950 p-1.5 rounded-xl border border-slate-800">
+        
+        <!-- Key Selector (All 12 Keys) -->
+        <div class="flex items-center space-x-1.5 px-2 border-r border-slate-800">
+          <span class="text-slate-400 font-medium">Key:</span>
+          <select id="keySelect" class="bg-slate-800 text-amber-400 font-bold px-2 py-1 rounded-lg border border-slate-700 outline-none focus:border-amber-500 cursor-pointer">
+            <!-- 12 Keys dynamically generated -->
+          </select>
+        </div>
+
+        <!-- Scale Type -->
+        <div class="flex items-center space-x-1.5 px-2 border-r border-slate-800">
+          <span class="text-slate-400 font-medium">Scale:</span>
+          <select id="scaleTypeSelect" class="bg-slate-800 text-slate-200 font-semibold px-2 py-1 rounded-lg border border-slate-700 outline-none focus:border-amber-500 cursor-pointer">
+            <option value="minorPentatonic">Minor Pentatonic</option>
+            <option value="minorBlues">Minor Blues (+♭5 Blue Note)</option>
+          </select>
+        </div>
+
+        <!-- Tunings -->
+        <div class="flex items-center space-x-1.5 px-2 border-r border-slate-800">
+          <span class="text-slate-400 font-medium">Tuning:</span>
+          <select id="tuningSelect" class="bg-slate-800 text-slate-200 font-medium px-2 py-1 rounded-lg border border-slate-700 outline-none focus:border-amber-500 cursor-pointer">
+            <option value="standard">Standard (E A D G B E)</option>
+            <option value="dropD">Drop D (D A D G B E)</option>
+            <option value="dadgad">DADGAD (D A D G A D)</option>
+            <option value="openD">Open D (D A D F# A D)</option>
+            <option value="halfStep">Half Step Down (Eb Ab Db Gb Bb Eb)</option>
+          </select>
+        </div>
+
+        <!-- Fretboard Finish -->
+        <div class="flex items-center space-x-1.5 px-2">
+          <span class="text-slate-400 font-medium">Wood:</span>
+          <select id="themeSelect" class="bg-slate-800 text-slate-300 px-2 py-1 rounded-lg border border-slate-700 outline-none focus:border-amber-500 cursor-pointer">
+            <option value="rosewood">Warm Rosewood</option>
+            <option value="ebony">Dark Ebony</option>
+            <option value="maple">Vintage Maple</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Quick Audio Controls -->
+      <div class="flex items-center space-x-2">
+        <button id="btnPlayScale" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-lg shadow-amber-600/20 flex items-center gap-1.5">
+          <i class="fa-solid fa-play"></i> Run Scale
+        </button>
+        <button id="btnToggleGroove" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 font-semibold text-xs rounded-xl transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-drum"></i> <span id="grooveBtnText">Rhythm Strum</span>
+        </button>
+        <button id="btnToggleDrone" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-teal-400 border border-teal-500/30 font-semibold text-xs rounded-xl transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-wave-square"></i> <span id="droneBtnText">Sub-Drone</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-4 flex flex-col gap-5">
+
+    <!-- Fretboard & Connection Controls Container -->
+    <section class="bg-slate-900/90 rounded-2xl border border-slate-800/80 p-4 shadow-2xl flex flex-col gap-4">
+      
+      <!-- Top Fretboard Filters & Layer Options -->
+      <div class="flex flex-wrap items-center justify-between gap-3 text-xs border-b border-slate-800/80 pb-3">
+        
+        <!-- CAGED Box Filter -->
+        <div class="flex items-center space-x-1 flex-wrap gap-y-1">
+          <span class="text-slate-400 font-semibold mr-2">CAGED Pattern:</span>
+          <button data-box="all" class="box-btn px-2.5 py-1 rounded-lg font-medium border bg-amber-600 text-slate-950 border-amber-500 shadow-sm">All Connected</button>
+          <button data-box="1" class="box-btn px-2.5 py-1 rounded-lg font-medium border bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700">Box 1</button>
+          <button data-box="2" class="box-btn px-2.5 py-1 rounded-lg font-medium border bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700">Box 2</button>
+          <button data-box="3" class="box-btn px-2.5 py-1 rounded-lg font-medium border bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700">Box 3</button>
+          <button data-box="4" class="box-btn px-2.5 py-1 rounded-lg font-medium border bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700">Box 4</button>
+          <button data-box="5" class="box-btn px-2.5 py-1 rounded-lg font-medium border bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700">Box 5</button>
+        </div>
+
+        <!-- Soloing Connection Overlays -->
+        <div class="flex items-center space-x-4 flex-wrap gap-y-1 text-slate-300">
+          <label class="flex items-center space-x-1.5 cursor-pointer hover:text-white">
+            <input type="checkbox" id="chkSlides" checked class="rounded bg-slate-800 border-slate-700 text-amber-500 focus:ring-0">
+            <span>Diagonal Slides</span>
+          </label>
+          <label class="flex items-center space-x-1.5 cursor-pointer hover:text-white">
+            <input type="checkbox" id="chkOctaves" class="rounded bg-slate-800 border-slate-700 text-amber-500 focus:ring-0">
+            <span>Octave Jump Paths</span>
+          </label>
+          <label class="flex items-center space-x-1.5 cursor-pointer hover:text-white">
+            <input type="checkbox" id="chkAnchors" class="rounded bg-slate-800 border-slate-700 text-amber-500 focus:ring-0">
+            <span>Target Anchors</span>
+          </label>
+          <label class="flex items-center space-x-1.5 cursor-pointer hover:text-white">
+            <input type="checkbox" id="chkHorizontal3NPS" class="rounded bg-slate-800 border-slate-700 text-amber-500 focus:ring-0">
+            <span>3NPS Horizontal Runs</span>
+          </label>
+          <label class="flex items-center space-x-1.5 cursor-pointer text-amber-400 font-medium">
+            <input type="checkbox" id="chkNoteNames" class="rounded bg-slate-800 border-slate-700 text-amber-500 focus:ring-0">
+            <span>Note Names (vs Degrees)</span>
+          </label>
+        </div>
+
+      </div>
+
+      <!-- Scrollable Fretboard Container -->
+      <div class="relative overflow-x-auto rounded-xl p-2 bg-slate-950 border border-slate-800/80">
+        
+        <!-- Fret Numbers Header Bar -->
+        <div id="fretNumbersHeader" class="flex min-w-[1150px] text-[10px] font-bold text-slate-400 mb-1 pl-12 pr-4">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- 22-Fret Interactive Fretboard Visual Canvas -->
+        <div id="fretboard" class="fretboard-rosewood relative min-w-[1150px] h-[230px] rounded-lg transition-all overflow-hidden select-none">
+          <!-- Connection Lines SVG Overlay -->
+          <svg id="svgOverlay" class="absolute inset-0 w-full h-full pointer-events-none z-15"></svg>
+        </div>
+
+      </div>
+
+      <!-- Interval Legend & Sound Control Footer Bar -->
+      <div class="flex flex-wrap items-center justify-between text-xs gap-3 bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+        
+        <!-- Interval Legend Colors -->
+        <div class="flex items-center space-x-3 flex-wrap gap-y-1">
+          <span class="text-slate-400 font-semibold">Interval Legend:</span>
+          
+          <div class="flex items-center space-x-1">
+            <span class="w-4 h-4 rounded-full bg-amber-500 text-slate-950 inline-block text-center text-[10px] font-bold leading-4">R</span>
+            <span class="text-slate-300">Root (1)</span>
+          </div>
+
+          <div class="flex items-center space-x-1">
+            <span class="w-4 h-4 rounded-full bg-cyan-400 text-slate-950 inline-block text-center text-[10px] font-bold leading-4">♭3</span>
+            <span class="text-slate-300">Minor 3rd</span>
+          </div>
+
+          <div class="flex items-center space-x-1">
+            <span class="w-4 h-4 rounded-full bg-purple-500 text-white inline-block text-center text-[10px] font-bold leading-4">4</span>
+            <span class="text-slate-300">Perfect 4th</span>
+          </div>
+
+          <div id="b5LegendGroup" class="flex items-center space-x-1">
+            <span class="w-4 h-4 rounded-full bg-rose-600 text-white inline-block text-center text-[10px] font-bold leading-4">♭5</span>
+            <span class="text-slate-300">Blue Note</span>
+          </div>
+
+          <div class="flex items-center space-x-1">
+            <span class="w-4 h-4 rounded-full bg-emerald-500 text-slate-950 inline-block text-center text-[10px] font-bold leading-4">5</span>
+            <span class="text-slate-300">Perfect 5th</span>
+          </div>
+
+          <div class="flex items-center space-x-1">
+            <span class="w-4 h-4 rounded-full bg-blue-500 text-white inline-block text-center text-[10px] font-bold leading-4">♭7</span>
+            <span class="text-slate-300">Minor 7th</span>
+          </div>
+        </div>
+
+        <!-- Master Tempo & Volume Controls -->
+        <div class="flex items-center space-x-5">
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-gauge-high text-amber-500"></i>
+            <span class="text-slate-400">Tempo:</span>
+            <input type="range" id="tempoSlider" min="60" max="160" value="100" class="w-24 accent-amber-500 cursor-pointer">
+            <span id="tempoValue" class="font-mono text-amber-400 font-bold w-12 text-right">100 BPM</span>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-volume-high text-slate-400"></i>
+            <input type="range" id="volumeSlider" min="0" max="100" value="70" class="w-16 accent-amber-500 cursor-pointer">
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Bottom Masterclass Split Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      
+      <!-- Guided Masterclass Modules Panel (7 Cols) -->
+      <section class="lg:col-span-7 bg-slate-900/90 rounded-2xl border border-slate-800/80 p-5 flex flex-col gap-4 shadow-xl">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h2 class="text-base font-bold text-slate-100 flex items-center gap-2 font-serif-heading">
+            <i class="fa-solid fa-graduation-cap text-amber-500"></i> Guided Soloing Masterclass Modules
+          </h2>
+          <span class="text-xs text-amber-400 font-semibold bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full">
+            Acoustic Connection System
+          </span>
+        </div>
+
+        <!-- Module Tab Navigation -->
+        <div class="flex items-center space-x-1 border-b border-slate-800 text-xs overflow-x-auto pb-1 scrollbar-none">
+          <button data-module="mod1" class="module-tab-btn px-3 py-1.5 rounded-t-lg font-semibold border-b-2 border-amber-500 text-amber-400 bg-slate-800">
+            1. Root Anchors
+          </button>
+          <button data-module="mod2" class="module-tab-btn px-3 py-1.5 rounded-t-lg font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200">
+            2. Diagonal Slides
+          </button>
+          <button data-module="mod3" class="module-tab-btn px-3 py-1.5 rounded-t-lg font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200">
+            3. Double-Stops & 6ths
+          </button>
+          <button data-module="mod4" class="module-tab-btn px-3 py-1.5 rounded-t-lg font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200">
+            4. Acoustic Bending
+          </button>
+          <button data-module="mod5" class="module-tab-btn px-3 py-1.5 rounded-t-lg font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200">
+            5. Hybrid "King Box"
+          </button>
+        </div>
+
+        <!-- Active Module Content Display -->
+        <div class="text-xs text-slate-300 leading-relaxed overflow-y-auto max-h-[260px] pr-2 flex-1 space-y-3">
+          
+          <!-- Module 1 -->
+          <div id="mod1" class="module-panel space-y-3">
+            <h3 class="text-sm font-bold text-amber-400">Finding Your Anchors: Root Note Grid across 5 CAGED Boxes</h3>
+            <p>
+              To solo fluidly without getting stuck in isolated box patterns, you must visualize <strong>Root Note Anchors (R)</strong> across all 6 strings.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-amber-300">Box 1 & 2 Anchors:</span>
+                <p class="text-slate-400 mt-1">Box 1 anchors on Strings 6, 4, and 1. Sliding into Box 2 shifts your anchor to the 4th and 2nd strings.</p>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-amber-300">Box 3, 4 & 5 Anchors:</span>
+                <p class="text-slate-400 mt-1">Box 3 anchors on String 5 & String 3. Box 4 anchors on String 5 & String 2. Box 5 anchors on String 6 & 1.</p>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between">
+              <span class="text-slate-400">Practice Goal: Click "Target Anchors" above to isolate root note resolution positions.</span>
+              <button onclick="document.getElementById('chkAnchors').click()" class="px-3 py-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-[11px] rounded-lg transition-all">
+                Highlight Anchors
+              </button>
+            </div>
+          </div>
+
+          <!-- Module 2 -->
+          <div id="mod2" class="module-panel hidden space-y-3">
+            <h3 class="text-sm font-bold text-amber-400">The Acoustic Diagonal Slide Connection</h3>
+            <p>
+              Acoustic guitars benefit tremendously from sliding transitions because picking every single note can sound harsh. Diagonal slides create smooth, vocal-like phrasing up and down the fretboard.
+            </p>
+            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1.5">
+              <p class="font-bold text-slate-200">The Golden G-String Shift Path (Box 1 ➔ Box 2 ➔ Box 3):</p>
+              <p class="text-slate-400">
+                Start on the ♭3 note in Box 1 on String 3 (G string) with finger 1, then slide up 2 frets into the 4th interval of Box 2 with finger 3. From there, hammer-on to the 5th interval.
+              </p>
+            </div>
+          </div>
+
+          <!-- Module 3 -->
+          <div id="mod3" class="module-panel hidden space-y-3">
+            <h3 class="text-sm font-bold text-amber-400">Double-Stops & 6ths Acoustic Harmony</h3>
+            <p>
+              When playing acoustic guitar solo without a band, double-stops (two notes plucked simultaneously) add harmonic weight and rhythm-lead texture.
+            </p>
+            <div class="grid grid-cols-2 gap-2 text-[11px]">
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-amber-300">Parallel 4ths Double-Stop:</span>
+                <p class="text-slate-400 mt-1">Barre adjacent string pairs (G & B or B & High E) across same frets in Box 1 & Box 4.</p>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-amber-300">Sliding 6ths (G & High E Strings):</span>
+                <p class="text-slate-400 mt-1">Pluck String 3 and String 1 together while skipping String 2 for classic Delta acoustic blues texture.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 4 -->
+          <div id="mod4" class="module-panel hidden space-y-3">
+            <h3 class="text-sm font-bold text-amber-400">Acoustic Bending & Micro-Tonal Vibrato</h3>
+            <p>
+              Steel string acoustic guitars typically feature heavy string gauges (.012-.053). Full-step string bends on lower frets can strain your fingers or break strings.
+            </p>
+            <ul class="list-disc pl-5 space-y-1.5 text-slate-400">
+              <li><strong class="text-slate-200">The Minor 3rd Curl (Quarter-step Bend):</strong> Instead of bending a full step, lightly push the ♭3 note up 1/4 step toward the Major 3rd before resolving to the Root.</li>
+              <li><strong class="text-slate-200">G-String Half-Step Bends:</strong> The G string is easiest to bend. Support the bending finger with 2 fingers behind it!</li>
+            </ul>
+          </div>
+
+          <!-- Module 5 -->
+          <div id="mod5" class="module-panel hidden space-y-3">
+            <h3 class="text-sm font-bold text-amber-400">The Hybrid "BB / Albert King Box" Position</h3>
+            <p>
+              The "King Box" sits right between Box 2 and Box 3 on the top three strings (G, B, High E). It offers effortless access to major and minor pentatonic soloing.
+            </p>
+            <p class="text-slate-400">
+              Anchor your index finger on the Root note on String 2 (B String). From this anchor, your ring finger can easily reach the 4th degree, bend up to the 5th, or reach the high Root on String 1.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Interactive Lick Library & Tab Player Panel (5 Cols) -->
+      <section class="lg:col-span-5 bg-slate-900/90 rounded-2xl border border-slate-800/80 p-5 flex flex-col gap-4 shadow-xl">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h2 class="text-base font-bold text-slate-100 flex items-center gap-2 font-serif-heading">
+            <i class="fa-solid fa-music text-amber-500"></i> Interactive Lick Library
+          </h2>
+          <span class="text-xs text-slate-400 font-mono">Tab Sync Engine</span>
+        </div>
+
+        <!-- Lick Preset Selection Dropdown -->
+        <div class="space-y-1.5">
+          <label class="text-xs text-slate-400 font-semibold block">Select Signature Lick Motif:</label>
+          <select id="lickSelect" class="w-full bg-slate-950 text-slate-200 text-xs font-semibold p-2.5 rounded-xl border border-slate-700 focus:border-amber-500 outline-none cursor-pointer">
+            <option value="lick1">1. Delta Blues Diagonal Slide (Box 1 ➔ 2)</option>
+            <option value="lick2">2. Country-Rock Double-Stop Groove</option>
+            <option value="lick3">3. High String Cascade Pull-offs (Box 4 ➔ 5)</option>
+            <option value="lick4">4. Triplet Hammer-on Shift (Box 2 ➔ 3)</option>
+            <option value="lick5">5. Speed Pentatonic Horizontal Run (Box 1 ➔ 5)</option>
+          </select>
+        </div>
+
+        <!-- Lick Information & Sequence Card -->
+        <div class="bg-slate-950 rounded-xl p-3 border border-slate-800 space-y-2 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <span id="lickTitle" class="text-xs font-bold text-amber-400">Delta Blues Diagonal Slide</span>
+              <span id="lickBoxBadge" class="text-[10px] font-semibold bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded-md border border-amber-500/20">Box 1 ➔ 2</span>
+            </div>
+            <p id="lickDesc" class="text-xs text-slate-400 leading-normal">
+              Classic acoustic acoustic motif starting on the low Root, sliding along the G-string into Box 2, and resolving on the high octave.
+            </p>
+          </div>
+
+          <!-- Lick Note Sequence Visual Badges -->
+          <div class="mt-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800/80 flex items-center justify-between overflow-x-auto">
+            <span class="text-[11px] text-slate-400 font-semibold mr-2">Sequence:</span>
+            <div id="lickNotesDisplay" class="flex items-center space-x-1.5 font-mono text-xs">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Lick Playback Controls & Speed Multipliers -->
+        <div class="flex items-center gap-2">
+          <button id="btnPlayLick" class="flex-1 py-2.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-lg shadow-amber-600/20 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-play"></i> Play Lick Motif
+          </button>
+          
+          <!-- Speed Toggle Group -->
+          <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-[11px] font-bold">
+            <button data-speed="0.5" class="speed-btn px-2 py-1 rounded text-slate-400 hover:text-white">0.5x</button>
+            <button data-speed="0.75" class="speed-btn px-2 py-1 rounded text-slate-400 hover:text-white">0.75x</button>
+            <button data-speed="1.0" class="speed-btn px-2 py-1 rounded bg-amber-600 text-slate-950 shadow">1x</button>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Dynamic Hover/Click Tooltip -->
+  <div id="noteTooltip" class="fixed hidden z-50 bg-slate-950/95 border border-amber-500/40 text-slate-200 text-xs rounded-xl p-3 shadow-2xl backdrop-blur-md pointer-events-none transition-opacity duration-150">
+    <div class="font-bold text-amber-400 border-b border-slate-800 pb-1 mb-1.5 flex items-center justify-between gap-4">
+      <span id="ttNoteName">A3</span>
+      <span id="ttDegree" class="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold">Root (1)</span>
+    </div>
+    <div class="space-y-0.5 text-slate-400 text-[11px]">
+      <div>String: <span id="ttString" class="text-slate-200">E (6th)</span></div>
+      <div>Fret Position: <span id="ttFret" class="text-slate-200">5</span></div>
+      <div>CAGED Pattern: <span id="ttBox" class="text-slate-200">Box 1</span></div>
+      <div>Suggested Finger: <span id="ttFinger" class="text-amber-400 font-medium">Index (1)</span></div>
+    </div>
+  </div>
+
+  <!-- JavaScript Engine Logic -->
+  <script>
+    /**
+     * Acoustic Guitar Minor Pentatonic Masterclass - Complete Logic Application
+     */
+
+    // --- Sound Synthesis Engine (Web Audio API Karplus-Strong Physical Modeling) ---
+    class GuitarSynth {
+      constructor() {
+        this.ctx = null;
+        this.masterGain = null;
+        
+        // Audio Track Generator Properties
+        this.droneOsc = null;
+        this.droneSubOsc = null;
+        this.droneGain = null;
+        this.isDronePlaying = false;
+
+        this.isGroovePlaying = false;
+        this.grooveTimer = null;
+
+        this.volume = 0.7;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioCtx();
+          this.masterGain = this.ctx.createGain();
+          this.masterGain.gain.value = this.volume;
+          this.masterGain.connect(this.ctx.destination);
+        }
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      setVolume(val) {
+        this.volume = val / 100;
+        if (this.masterGain) {
+          this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
+        }
+      }
+
+      // Plucked acoustic string synthesis algorithm
+      pluck(freq, duration = 2.8) {
+        this.init();
+        if (freq <= 0) return;
+
+        const ctx = this.ctx;
+        const startTime = ctx.currentTime;
+
+        const bufferSize = Math.max(2, Math.floor(ctx.sampleRate / freq));
+        const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = Math.random() * 2 - 1;
+        }
+
+        const whiteNoise = ctx.createBufferSource();
+        whiteNoise.buffer = noiseBuffer;
+        whiteNoise.loop = true;
+
+        // Acoustic string lowpass decay filter
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(Math.min(freq * 7, 9000), startTime);
+        filter.frequency.exponentialRampToValueAtTime(Math.max(freq * 1.2, 180), startTime + duration);
+
+        // Acoustic body resonance filter (warm wood resonance)
+        const bodyResonance = ctx.createBiquadFilter();
+        bodyResonance.type = 'peaking';
+        bodyResonance.frequency.value = 210;
+        bodyResonance.Q.value = 1.8;
+        bodyResonance.gain.value = 5;
+
+        const noteGain = ctx.createGain();
+        noteGain.gain.setValueAtTime(0.9, startTime);
+        noteGain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+        whiteNoise.connect(filter);
+        filter.connect(bodyResonance);
+        bodyResonance.connect(noteGain);
+        noteGain.connect(this.masterGain);
+
+        whiteNoise.start(startTime);
+        whiteNoise.stop(startTime + duration);
+      }
+
+      // Toggle Sub-Drone Generator
+      toggleDrone(rootFreq) {
+        this.init();
+        if (this.isDronePlaying) {
+          this.stopDrone();
+          return false;
+        } else {
+          this.startDrone(rootFreq);
+          return true;
+        }
+      }
+
+      startDrone(freq) {
+        this.stopDrone();
+        if (!freq) return;
+
+        const ctx = this.ctx;
+        const now = ctx.currentTime;
+
+        this.droneGain = ctx.createGain();
+        this.droneGain.gain.setValueAtTime(0.01, now);
+        this.droneGain.gain.linearRampToValueAtTime(0.22, now + 1.2);
+
+        let lowFreq = freq;
+        while (lowFreq > 140) lowFreq /= 2;
+
+        this.droneOsc = ctx.createOscillator();
+        this.droneSubOsc = ctx.createOscillator();
+
+        this.droneOsc.type = 'triangle';
+        this.droneSubOsc.type = 'sine';
+
+        this.droneOsc.frequency.setValueAtTime(lowFreq, now); // Root
+        this.droneSubOsc.frequency.setValueAtTime(lowFreq * 1.4983, now); // Perfect 5th drone
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = 400;
+
+        this.droneOsc.connect(filter);
+        this.droneSubOsc.connect(filter);
+        filter.connect(this.droneGain);
+        this.droneGain.connect(this.masterGain);
+
+        this.droneOsc.start(now);
+        this.droneSubOsc.start(now);
+        this.isDronePlaying = true;
+      }
+
+      stopDrone() {
+        if (this.droneGain && this.ctx) {
+          const now = this.ctx.currentTime;
+          this.droneGain.gain.linearRampToValueAtTime(0.001, now + 0.5);
+          setTimeout(() => {
+            if (this.droneOsc) { this.droneOsc.stop(); this.droneOsc.disconnect(); }
+            if (this.droneSubOsc) { this.droneSubOsc.stop(); this.droneSubOsc.disconnect(); }
+            this.isDronePlaying = false;
+          }, 500);
+        }
+      }
+
+      updateDroneFreq(freq) {
+        if (this.isDronePlaying && this.droneOsc) {
+          let lowFreq = freq;
+          while (lowFreq > 140) lowFreq /= 2;
+          const now = this.ctx.currentTime;
+          this.droneOsc.frequency.exponentialRampToValueAtTime(lowFreq, now + 0.2);
+          this.droneSubOsc.frequency.exponentialRampToValueAtTime(lowFreq * 1.4983, now + 0.2);
+        }
+      }
+
+      // Rhythm Strum Acoustic Groove Generator (Percussive Strumming)
+      toggleGroove(rootFreq, tempo) {
+        this.init();
+        if (this.isGroovePlaying) {
+          this.stopGroove();
+          return false;
+        } else {
+          this.startGroove(rootFreq, tempo);
+          return true;
+        }
+      }
+
+      startGroove(rootFreq, tempo) {
+        this.stopGroove();
+        this.isGroovePlaying = true;
+
+        let baseFreq = rootFreq;
+        while (baseFreq > 220) baseFreq /= 2;
+
+        const beatMs = (60 / tempo) * 1000;
+        let step = 0;
+
+        // Acoustic Rhythm Chord Frequencies (Minor 11th / Minor 7th groove)
+        const chordOffsets = [0, 3, 7, 10, 14]; // Root, b3, 5, b7, 9
+
+        this.grooveTimer = setInterval(() => {
+          if (!this.isGroovePlaying) return;
+
+          // Strumming Pattern Logic: Beats 1, 2, 3, 4 with syncopated up-strums
+          if (step % 2 === 0) {
+            // Downstrum (Bass note + chord sweep)
+            this.pluck(baseFreq, 1.2); // Bass root
+            setTimeout(() => {
+              chordOffsets.slice(1).forEach((semitones, idx) => {
+                setTimeout(() => {
+                  this.pluck(baseFreq * Math.pow(2, semitones / 12), 0.8);
+                }, idx * 18); // Arpeggiated strum delay
+              });
+            }, 30);
+          } else {
+            // Light Upstrum
+            chordOffsets.slice(2).forEach((semitones, idx) => {
+              setTimeout(() => {
+                this.pluck(baseFreq * Math.pow(2, semitones / 12), 0.5);
+              }, idx * 12);
+            });
+          }
+
+          step = (step + 1) % 8;
+        }, beatMs / 2);
+      }
+
+      stopGroove() {
+        this.isGroovePlaying = false;
+        if (this.grooveTimer) {
+          clearInterval(this.grooveTimer);
+          this.grooveTimer = null;
+        }
+      }
+    }
+
+    // Instantiate Synth
+    const soundSynth = new GuitarSynth();
+
+    // --- Musical Constants & Data Structures ---
+    const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+
+    // Frequency Mapping
+    const NOTE_FREQS = {
+      'C2': 65.41, 'C#2': 69.30, 'D2': 73.42, 'D#2': 77.78, 'E2': 82.41, 'F2': 87.31, 'F#2': 92.50, 'G2': 98.00, 'G#2': 103.83, 'A2': 110.00, 'A#2': 116.54, 'B2': 123.47,
+      'C3': 130.81, 'C#3': 138.59, 'D3': 146.83, 'D#3': 155.56, 'E3': 164.81, 'F3': 174.61, 'F#3': 185.00, 'G3': 196.00, 'G#3': 207.65, 'A3': 220.00, 'A#3': 233.08, 'B3': 246.94,
+      'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13, 'E4': 329.63, 'F4': 349.23, 'F#4': 369.99, 'G4': 392.00, 'G#4': 415.30, 'A4': 440.00, 'A#4': 466.16, 'B4': 493.88,
+      'C5': 523.25, 'C#5': 554.37, 'D5': 587.33, 'D#5': 622.25, 'E5': 659.25, 'F5': 698.46, 'F#5': 739.99, 'G5': 783.99, 'G#5': 830.61, 'A5': 880.00, 'A#5': 932.33, 'B5': 987.77,
+      'C6': 1046.50
+    };
+
+    // Guitar Tunings Presets
+    const TUNING_PRESETS = {
+      standard: [
+        { name: 'E', pitch: 'E4', wound: false },
+        { name: 'B', pitch: 'B3', wound: false },
+        { name: 'G', pitch: 'G3', wound: false },
+        { name: 'D', pitch: 'D3', wound: true  },
+        { name: 'A', pitch: 'A2', wound: true  },
+        { name: 'E', pitch: 'E2', wound: true  }
+      ],
+      dropD: [
+        { name: 'E', pitch: 'E4', wound: false },
+        { name: 'B', pitch: 'B3', wound: false },
+        { name: 'G', pitch: 'G3', wound: false },
+        { name: 'D', pitch: 'D3', wound: true  },
+        { name: 'A', pitch: 'A2', wound: true  },
+        { name: 'D', pitch: 'D2', wound: true  }
+      ],
+      dadgad: [
+        { name: 'D', pitch: 'D4', wound: false },
+        { name: 'A', pitch: 'A3', wound: false },
+        { name: 'G', pitch: 'G3', wound: false },
+        { name: 'D', pitch: 'D3', wound: true  },
+        { name: 'A', pitch: 'A2', wound: true  },
+        { name: 'D', pitch: 'D2', wound: true  }
+      ],
+      openD: [
+        { name: 'D',  pitch: 'D4', wound: false },
+        { name: 'A',  pitch: 'A3', wound: false },
+        { name: 'F#', pitch: 'F#3', wound: false },
+        { name: 'D',  pitch: 'D3', wound: true  },
+        { name: 'A',  pitch: 'A2', wound: true  },
+        { name: 'D',  pitch: 'D2', wound: true  }
+      ],
+      halfStep: [
+        { name: 'Eb', pitch: 'D#4', wound: false },
+        { name: 'Bb', pitch: 'A#3', wound: false },
+        { name: 'Gb', pitch: 'F#3', wound: false },
+        { name: 'Db', pitch: 'C#3', wound: true  },
+        { name: 'Ab', pitch: 'G#2', wound: true  },
+        { name: 'Eb', pitch: 'D#2', wound: true  }
+      ]
+    };
+
+    // Scale Intervals & Styling Definitions
+    const PENTATONIC_DEGREES = [
+      { name: '1',  label: 'R',  semitones: 0,  color: 'bg-amber-500 text-slate-950 border-amber-300 font-black' },
+      { name: 'b3', label: '♭3', semitones: 3,  color: 'bg-cyan-400 text-slate-950 border-cyan-200' },
+      { name: '4',  label: '4',  semitones: 5,  color: 'bg-purple-500 text-white border-purple-300' },
+      { name: 'b5', label: '♭5', semitones: 6,  color: 'bg-rose-600 text-white border-rose-300', isBlueNote: true },
+      { name: '5',  label: '5',  semitones: 7,  color: 'bg-emerald-500 text-slate-950 border-emerald-300' },
+      { name: 'b7', label: '♭7', semitones: 10, color: 'bg-blue-500 text-white border-blue-300' }
+    ];
+
+    // Signature Licks Presets
+    const LICK_PRESETS = {
+      lick1: {
+        title: "Delta Blues Diagonal Slide",
+        boxBadge: "Box 1 ➔ 2",
+        desc: "Classic acoustic motif starting on the low Root, sliding along the G-string into Box 2, and resolving on the high octave.",
+        degrees: ['1', 'b3', '4', '5', 'b7', '1']
+      },
+      lick2: {
+        title: "Country-Rock Double-Stop Groove",
+        boxBadge: "Box 1 Blues",
+        desc: "Combines the blue note (♭5) with double-stop harmony on G & B strings for punchy unplugged acoustic rhythm-lead.",
+        degrees: ['b7', '1', 'b3', 'b5', '5', '1']
+      },
+      lick3: {
+        title: "High String Cascade Pull-offs",
+        boxBadge: "Box 4 ➔ 5",
+        desc: "Descending fast pull-off cascade along the top two strings, moving smoothly from Box 5 back into Box 4.",
+        degrees: ['1', 'b7', '5', '4', 'b3', '1']
+      },
+      lick4: {
+        title: "Triplet Hammer-on Shift",
+        boxBadge: "Box 2 ➔ 3",
+        desc: "Rhythmic triplet hammer-ons connecting Box 2 and Box 3 along the middle D and G strings.",
+        degrees: ['1', 'b3', '4', '5', 'b7', '1', 'b3']
+      },
+      lick5: {
+        title: "Speed Pentatonic Horizontal Run",
+        boxBadge: "Box 1 ➔ 5 Full Run",
+        desc: "Full horizontal 3-notes-per-string sliding sequence covering the entire length of the neck.",
+        degrees: ['1', 'b3', '4', '5', 'b7', '1', 'b3', '4', '5']
+      }
+    };
+
+    // --- Application State ---
+    const appState = {
+      key: 'A',
+      scaleType: 'minorPentatonic',
+      tuning: 'standard',
+      theme: 'rosewood',
+      selectedBox: 'all',
+      showSlides: true,
+      showOctaves: false,
+      showAnchors: false,
+      showHorizontal3NPS: false,
+      showNoteNames: false,
+      tempo: 100,
+      lickSpeedMultiplier: 1.0,
+      activeLickId: 'lick1',
+      activeStepIndex: -1
+    };
+
+    // --- Helper Functions ---
+    function getNoteIndex(noteName) {
+      return NOTES.indexOf(noteName);
+    }
+
+    function getNoteFromOffset(rootNote, semitones) {
+      const rootIdx = getNoteIndex(rootNote);
+      return NOTES[(rootIdx + semitones) % 12];
+    }
+
+    function getPitchAtFret(stringPitch, fret) {
+      const match = stringPitch.match(/^([A-G]#?)(\d)$/);
+      if (!match) return stringPitch;
+
+      let [, note, octave] = match;
+      let noteIdx = getNoteIndex(note) + fret;
+      octave = parseInt(octave);
+
+      while (noteIdx >= 12) {
+        noteIdx -= 12;
+        octave++;
+      }
+      return `${NOTES[noteIdx]}${octave}`;
+    }
+
+    function getCAGEDBox(stringIdx, fret, noteName, rootNote) {
+      const rootIdx = getNoteIndex(rootNote);
+      const lowERootFret = (rootIdx - getNoteIndex('E') + 12) % 12;
+      const relativeFret = (fret - lowERootFret + 24) % 12;
+
+      if (relativeFret >= 0 && relativeFret <= 3) return 1;
+      if (relativeFret >= 2 && relativeFret <= 5) return 2;
+      if (relativeFret >= 5 && relativeFret <= 8) return 3;
+      if (relativeFret >= 7 && relativeFret <= 10) return 4;
+      if (relativeFret >= 9 && relativeFret <= 12) return 5;
+
+      return 1;
+    }
+
+    // --- DOM Elements ---
+    const keySelect = document.getElementById('keySelect');
+    const scaleTypeSelect = document.getElementById('scaleTypeSelect');
+    const tuningSelect = document.getElementById('tuningSelect');
+    const themeSelect = document.getElementById('themeSelect');
+    const fretboardEl = document.getElementById('fretboard');
+    const fretNumbersHeader = document.getElementById('fretNumbersHeader');
+    const svgOverlay = document.getElementById('svgOverlay');
+
+    const chkSlides = document.getElementById('chkSlides');
+    const chkOctaves = document.getElementById('chkOctaves');
+    const chkAnchors = document.getElementById('chkAnchors');
+    const chkHorizontal3NPS = document.getElementById('chkHorizontal3NPS');
+    const chkNoteNames = document.getElementById('chkNoteNames');
+    const b5LegendGroup = document.getElementById('b5LegendGroup');
+
+    const tempoSlider = document.getElementById('tempoSlider');
+    const tempoValue = document.getElementById('tempoValue');
+    const volumeSlider = document.getElementById('volumeSlider');
+
+    const btnPlayScale = document.getElementById('btnPlayScale');
+    const btnToggleGroove = document.getElementById('btnToggleGroove');
+    const grooveBtnText = document.getElementById('grooveBtnText');
+    const btnToggleDrone = document.getElementById('btnToggleDrone');
+    const droneBtnText = document.getElementById('droneBtnText');
+
+    const noteTooltip = document.getElementById('noteTooltip');
+
+    // Populate Key Select Options
+    NOTES.forEach(note => {
+      const opt = document.createElement('option');
+      opt.value = note;
+      opt.textContent = note;
+      if (note === 'A') opt.selected = true;
+      keySelect.appendChild(opt);
+    });
+
+    // --- Main Render Logic ---
+    function renderApp() {
+      renderFretHeader();
+      renderFretboard();
+      updateLickDisplay();
+      updateLegendVisibility();
+    }
+
+    function updateLegendVisibility() {
+      const isBlues = appState.scaleType === 'minorBlues';
+      b5LegendGroup.style.display = isBlues ? 'flex' : 'none';
+    }
+
+    function renderFretHeader() {
+      fretNumbersHeader.innerHTML = '';
+      const totalFrets = 22;
+
+      const nutDiv = document.createElement('div');
+      nutDiv.style.width = '38px';
+      nutDiv.className = 'text-center text-amber-500 font-extrabold';
+      nutDiv.textContent = 'NUT';
+      fretNumbersHeader.appendChild(nutDiv);
+
+      for (let f = 1; f <= totalFrets; f++) {
+        const div = document.createElement('div');
+        div.className = 'flex-1 text-center';
+        div.textContent = f;
+        if ([3, 5, 7, 9, 12, 15, 17, 19, 21].includes(f)) {
+          div.className += ' text-amber-400 font-extrabold';
+        }
+        fretNumbersHeader.appendChild(div);
+      }
+    }
+
+    function renderFretboard() {
+      fretboardEl.innerHTML = '';
+      fretboardEl.appendChild(svgOverlay);
+      svgOverlay.innerHTML = '';
+
+      fretboardEl.className = `fretboard-${appState.theme} relative min-w-[1150px] h-[230px] rounded-xl transition-all overflow-hidden select-none`;
+
+      const totalFrets = 22;
+      const currentTuning = TUNING_PRESETS[appState.tuning] || TUNING_PRESETS.standard;
+
+      // 1. Draw Nut
+      const nut = document.createElement('div');
+      nut.className = 'nut-wire';
+      nut.style.left = '38px';
+      fretboardEl.appendChild(nut);
+
+      // 2. Draw Frets & Markers
+      const widthPct = (100 - 3.8) / totalFrets;
+
+      for (let f = 1; f <= totalFrets; f++) {
+        const fretX = 3.8 + f * widthPct;
+        const fretWire = document.createElement('div');
+        fretWire.className = 'fret-wire';
+        fretWire.style.left = `${fretX}%`;
+        fretboardEl.appendChild(fretWire);
+
+        if ([3, 5, 7, 9, 15, 17, 19, 21].includes(f)) {
+          const marker = document.createElement('div');
+          marker.className = 'fret-marker';
+          marker.style.left = `${fretX - (widthPct / 2)}%`;
+          marker.style.top = '50%';
+          marker.style.transform = 'translate(-50%, -50%)';
+          fretboardEl.appendChild(marker);
+        } else if (f === 12) {
+          const m1 = document.createElement('div');
+          m1.className = 'fret-marker';
+          m1.style.left = `${fretX - (widthPct / 2)}%`;
+          m1.style.top = '28%';
+          m1.style.transform = 'translate(-50%, -50%)';
+
+          const m2 = document.createElement('div');
+          m2.className = 'fret-marker';
+          m2.style.left = `${fretX - (widthPct / 2)}%`;
+          m2.style.top = '72%';
+          m2.style.transform = 'translate(-50%, -50%)';
+
+          fretboardEl.appendChild(m1);
+          fretboardEl.appendChild(m2);
+        }
+      }
+
+      // 3. Draw Strings
+      currentTuning.forEach((str, sIdx) => {
+        const yPos = 11 + sIdx * 15.5;
+        const stringLine = document.createElement('div');
+        stringLine.className = `string-line ${str.wound ? 'string-wound' : ''}`;
+        stringLine.style.top = `${yPos}%`;
+        stringLine.style.height = `${1.5 + (sIdx * 0.65)}px`;
+        stringLine.id = `string-${sIdx}`;
+        fretboardEl.appendChild(stringLine);
+      });
+
+      // 4. Calculate Scale Notes
+      const scaleDegrees = PENTATONIC_DEGREES.filter(d => {
+        if (appState.scaleType === 'minorPentatonic' && d.isBlueNote) return false;
+        return true;
+      });
+
+      const scaleNotesMap = {};
+      scaleDegrees.forEach(deg => {
+        const noteName = getNoteFromOffset(appState.key, deg.semitones);
+        scaleNotesMap[noteName] = deg;
+      });
+
+      const renderedNotes = [];
+
+      // 5. Populate Note Nodes
+      currentTuning.forEach((strObj, sIdx) => {
+        const yPos = 11 + sIdx * 15.5;
+
+        for (let fret = 0; fret <= totalFrets; fret++) {
+          const pitch = getPitchAtFret(strObj.pitch, fret);
+          const noteName = pitch.replace(/\d/, '');
+
+          if (scaleNotesMap[noteName]) {
+            const degreeInfo = scaleNotesMap[noteName];
+            const boxPattern = getCAGEDBox(sIdx, fret, noteName, appState.key);
+
+            if (appState.selectedBox !== 'all' && parseInt(appState.selectedBox) !== boxPattern) {
+              continue;
+            }
+
+            let xPosPct = (fret === 0) ? 1.8 : (3.8 + (fret - 0.5) * widthPct);
+
+            const noteNode = document.createElement('div');
+            noteNode.className = `note-badge absolute flex items-center justify-center rounded-full cursor-pointer border shadow-md ${degreeInfo.color}`;
+            
+            const isRoot = degreeInfo.semitones === 0;
+            const sizeClass = isRoot ? 'w-6 h-6 text-xs font-black' : 'w-5 h-5 text-[10px] font-bold';
+            noteNode.className += ` ${sizeClass}`;
+
+            noteNode.style.left = `${xPosPct}%`;
+            noteNode.style.top = `${yPos}%`;
+            noteNode.style.transform = 'translate(-50%, -50%)';
+
+            noteNode.textContent = appState.showNoteNames ? noteName : degreeInfo.label;
+            noteNode.dataset.pitch = pitch;
+            noteNode.dataset.note = noteName;
+            noteNode.dataset.string = sIdx + 1;
+            noteNode.dataset.fret = fret;
+            noteNode.dataset.degree = degreeInfo.label;
+            noteNode.dataset.box = boxPattern;
+
+            noteNode.addEventListener('mousedown', (e) => {
+              e.stopPropagation();
+              playNoteNode(noteNode, pitch, sIdx);
+            });
+
+            noteNode.addEventListener('mouseenter', (e) => showTooltip(e, noteNode));
+            noteNode.addEventListener('mouseleave', hideTooltip);
+
+            fretboardEl.appendChild(noteNode);
+
+            renderedNotes.push({
+              node: noteNode,
+              string: sIdx,
+              fret: fret,
+              x: xPosPct,
+              y: yPos,
+              degree: degreeInfo,
+              box: boxPattern,
+              isRoot: isRoot
+            });
+          }
+        }
+      });
+
+      // 6. Visual Connection SVGs
+      if (appState.showSlides) drawDiagonalSlides(renderedNotes);
+      if (appState.showOctaves) drawOctavePaths(renderedNotes);
+      if (appState.showAnchors) highlightTargetAnchors(renderedNotes);
+      if (appState.showHorizontal3NPS) drawHorizontal3NPS(renderedNotes);
+    }
+
+    function playNoteNode(noteNode, pitch, stringIdx) {
+      const freq = NOTE_FREQS[pitch] || 220;
+      soundSynth.pluck(freq);
+
+      noteNode.classList.add('active-played');
+      setTimeout(() => noteNode.classList.remove('active-played'), 280);
+
+      const strEl = document.getElementById(`string-${stringIdx}`);
+      if (strEl) {
+        strEl.classList.add('vibrating');
+        setTimeout(() => strEl.classList.remove('vibrating'), 280);
+      }
+    }
+
+    // --- Overlay Connection SVG Draw Routines ---
+    function drawDiagonalSlides(notes) {
+      const gStringNotes = notes.filter(n => n.string === 2); // String 3 (G string)
+      for (let i = 0; i < gStringNotes.length - 1; i++) {
+        const curr = gStringNotes[i];
+        const next = gStringNotes[i + 1];
+
+        if (Math.abs(curr.fret - next.fret) <= 3 && curr.fret !== 0) {
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', `${curr.x}%`);
+          line.setAttribute('y1', `${curr.y}%`);
+          line.setAttribute('x2', `${next.x}%`);
+          line.setAttribute('y2', `${next.y}%`);
+          line.setAttribute('stroke', '#F59E0B');
+          line.setAttribute('stroke-width', '2.5');
+          line.setAttribute('class', 'slide-connection-line');
+          svgOverlay.appendChild(line);
+        }
+      }
+    }
+
+    function drawOctavePaths(notes) {
+      const rootNotes = notes.filter(n => n.isRoot);
+      for (let i = 0; i < rootNotes.length; i++) {
+        for (let j = i + 1; j < rootNotes.length; j++) {
+          const r1 = rootNotes[i];
+          const r2 = rootNotes[j];
+
+          if (Math.abs(r1.string - r2.string) <= 3 && Math.abs(r1.fret - r2.fret) <= 5) {
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', `${r1.x}%`);
+            line.setAttribute('y1', `${r1.y}%`);
+            line.setAttribute('x2', `${r2.x}%`);
+            line.setAttribute('y2', `${r2.y}%`);
+            line.setAttribute('stroke', '#10B981');
+            line.setAttribute('stroke-width', '2');
+            line.setAttribute('opacity', '0.65');
+            svgOverlay.appendChild(line);
+          }
+        }
+      }
+    }
+
+    function highlightTargetAnchors(notes) {
+      notes.filter(n => n.isRoot).forEach(r => {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', `${r.x}%`);
+        circle.setAttribute('cy', `${r.y}%`);
+        circle.setAttribute('r', '14');
+        circle.setAttribute('fill', 'none');
+        circle.setAttribute('stroke', '#F59E0B');
+        circle.setAttribute('stroke-width', '2');
+        circle.setAttribute('class', 'target-anchor-pulse');
+        svgOverlay.appendChild(circle);
+      });
+    }
+
+    function drawHorizontal3NPS(notes) {
+      [0, 1, 2, 3, 4, 5].forEach(strIdx => {
+        const strNotes = notes.filter(n => n.string === strIdx && n.fret !== 0);
+        for (let i = 0; i < strNotes.length - 1; i++) {
+          const c = strNotes[i];
+          const n = strNotes[i + 1];
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', `${c.x}%`);
+          line.setAttribute('y1', `${c.y}%`);
+          line.setAttribute('x2', `${n.x}%`);
+          line.setAttribute('y2', `${n.y}%`);
+          line.setAttribute('stroke', '#A855F7');
+          line.setAttribute('stroke-width', '1.5');
+          line.setAttribute('opacity', '0.5');
+          svgOverlay.appendChild(line);
+        }
+      });
+    }
+
+    // --- Tooltip Information ---
+    function showTooltip(e, node) {
+      const pitch = node.dataset.pitch;
+      const noteName = node.dataset.note;
+      const stringNum = node.dataset.string;
+      const fretNum = node.dataset.fret;
+      const degree = node.dataset.degree;
+      const box = node.dataset.box;
+
+      document.getElementById('ttNoteName').textContent = `${noteName} (${pitch})`;
+      document.getElementById('ttDegree').textContent = `Degree: ${degree}`;
+      document.getElementById('ttString').textContent = `String ${stringNum}`;
+      document.getElementById('ttFret').textContent = fretNum === '0' ? 'Open String' : fretNum;
+      document.getElementById('ttBox').textContent = `Box ${box}`;
+
+      const fingerMap = { '0': 'Open', '1': 'Index (1)', '2': 'Middle (2)', '3': 'Ring (3)', '4': 'Pinky (4)' };
+      const relFinger = ((parseInt(fretNum) % 4) || 4);
+      document.getElementById('ttFinger').textContent = fretNum === '0' ? 'Open' : (fingerMap[relFinger] || 'Index (1)');
+
+      const rect = node.getBoundingClientRect();
+      noteTooltip.style.left = `${rect.left + window.scrollX - 45}px`;
+      noteTooltip.style.top = `${rect.top + window.scrollY - 115}px`;
+      noteTooltip.classList.remove('hidden');
+    }
+
+    function hideTooltip() {
+      noteTooltip.classList.add('hidden');
+    }
+
+    // --- Interactive Lick Trainer ---
+    function updateLickDisplay() {
+      const lick = LICK_PRESETS[appState.activeLickId];
+      if (!lick) return;
+
+      document.getElementById('lickTitle').textContent = lick.title;
+      document.getElementById('lickBoxBadge').textContent = lick.boxBadge;
+      document.getElementById('lickDesc').textContent = lick.desc;
+
+      const displayContainer = document.getElementById('lickNotesDisplay');
+      displayContainer.innerHTML = '';
+
+      lick.degrees.forEach((degLabel, idx) => {
+        const noteName = getNoteFromOffset(appState.key, getSemitoneFromDegree(degLabel));
+        const badge = document.createElement('span');
+        badge.className = `px-2 py-0.5 rounded border text-[11px] font-bold ${idx === appState.activeStepIndex ? 'bg-amber-400 text-slate-950 border-amber-300 scale-110' : 'bg-slate-900 text-slate-300 border-slate-700'}`;
+        badge.textContent = `${degLabel} (${noteName})`;
+        displayContainer.appendChild(badge);
+      });
+    }
+
+    function getSemitoneFromDegree(degLabel) {
+      const match = PENTATONIC_DEGREES.find(d => d.label === degLabel);
+      return match ? match.semitones : 0;
+    }
+
+    let playbackTimer = null;
+    function playLickSequence() {
+      if (playbackTimer) clearInterval(playbackTimer);
+
+      const lick = LICK_PRESETS[appState.activeLickId];
+      let step = 0;
+      const baseInterval = (60 / appState.tempo) * 450;
+      const intervalMs = baseInterval / appState.lickSpeedMultiplier;
+
+      const allNoteNodes = Array.from(document.querySelectorAll('.note-badge'));
+
+      playbackTimer = setInterval(() => {
+        if (step >= lick.degrees.length) {
+          clearInterval(playbackTimer);
+          appState.activeStepIndex = -1;
+          updateLickDisplay();
+          return;
+        }
+
+        appState.activeStepIndex = step;
+        updateLickDisplay();
+
+        const targetDegreeLabel = lick.degrees[step];
+        const matchingNode = allNoteNodes.find(n => n.dataset.degree === targetDegreeLabel);
+
+        if (matchingNode) {
+          const pitch = matchingNode.dataset.pitch;
+          const sIdx = parseInt(matchingNode.dataset.string) - 1;
+          playNoteNode(matchingNode, pitch, sIdx);
+        }
+
+        step++;
+      }, intervalMs);
+    }
+
+    function runScaleAscending() {
+      const allNoteNodes = Array.from(document.querySelectorAll('.note-badge'));
+      if (allNoteNodes.length === 0) return;
+
+      allNoteNodes.sort((a, b) => (NOTE_FREQS[a.dataset.pitch] || 0) - (NOTE_FREQS[b.dataset.pitch] || 0));
+
+      let i = 0;
+      const intervalMs = (60 / appState.tempo) * 350;
+
+      const timer = setInterval(() => {
+        if (i >= allNoteNodes.length) {
+          clearInterval(timer);
+          return;
+        }
+        const node = allNoteNodes[i];
+        playNoteNode(node, node.dataset.pitch, parseInt(node.dataset.string) - 1);
+        i++;
+      }, intervalMs);
+    }
+
+    // --- Event Listeners Setup ---
+    keySelect.addEventListener('change', (e) => {
+      appState.key = e.target.value;
+      renderApp();
+      const rootFreq = NOTE_FREQS[`${appState.key}3`] || 220;
+      if (soundSynth.isDronePlaying) soundSynth.updateDroneFreq(rootFreq);
+      if (soundSynth.isGroovePlaying) soundSynth.startGroove(rootFreq, appState.tempo);
+    });
+
+    scaleTypeSelect.addEventListener('change', (e) => {
+      appState.scaleType = e.target.value;
+      renderApp();
+    });
+
+    tuningSelect.addEventListener('change', (e) => {
+      appState.tuning = e.target.value;
+      renderApp();
+    });
+
+    themeSelect.addEventListener('change', (e) => {
+      appState.theme = e.target.value;
+      renderApp();
+    });
+
+    document.querySelectorAll('.box-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.box-btn').forEach(b => {
+          b.className = 'box-btn px-2.5 py-1 rounded-lg font-medium border bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700';
+        });
+        btn.className = 'box-btn px-2.5 py-1 rounded-lg font-medium border bg-amber-600 text-slate-950 border-amber-500 shadow-sm';
+        appState.selectedBox = btn.dataset.box;
+        renderApp();
+      });
+    });
+
+    chkSlides.addEventListener('change', (e) => { appState.showSlides = e.target.checked; renderApp(); });
+    chkOctaves.addEventListener('change', (e) => { appState.showOctaves = e.target.checked; renderApp(); });
+    chkAnchors.addEventListener('change', (e) => { appState.showAnchors = e.target.checked; renderApp(); });
+    chkHorizontal3NPS.addEventListener('change', (e) => { appState.showHorizontal3NPS = e.target.checked; renderApp(); });
+    chkNoteNames.addEventListener('change', (e) => { appState.showNoteNames = e.target.checked; renderApp(); });
+
+    tempoSlider.addEventListener('input', (e) => {
+      appState.tempo = parseInt(e.target.value);
+      tempoValue.textContent = `${appState.tempo} BPM`;
+      if (soundSynth.isGroovePlaying) {
+        soundSynth.startGroove(NOTE_FREQS[`${appState.key}3`] || 220, appState.tempo);
+      }
+    });
+
+    volumeSlider.addEventListener('input', (e) => {
+      soundSynth.setVolume(parseInt(e.target.value));
+    });
+
+    btnPlayScale.addEventListener('click', runScaleAscending);
+
+    btnToggleDrone.addEventListener('click', () => {
+      const rootFreq = NOTE_FREQS[`${appState.key}3`] || 220;
+      const isPlaying = soundSynth.toggleDrone(rootFreq);
+      droneBtnText.textContent = isPlaying ? 'Stop Drone' : 'Sub-Drone';
+      btnToggleDrone.classList.toggle('bg-teal-600', isPlaying);
+      btnToggleDrone.classList.toggle('text-slate-950', isPlaying);
+    });
+
+    btnToggleGroove.addEventListener('click', () => {
+      const rootFreq = NOTE_FREQS[`${appState.key}3`] || 220;
+      const isPlaying = soundSynth.toggleGroove(rootFreq, appState.tempo);
+      grooveBtnText.textContent = isPlaying ? 'Stop Rhythm' : 'Rhythm Strum';
+      btnToggleGroove.classList.toggle('bg-amber-600', isPlaying);
+      btnToggleGroove.classList.toggle('text-slate-950', isPlaying);
+    });
+
+    // Masterclass Module Tabs
+    document.querySelectorAll('.module-tab-btn').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.module-tab-btn').forEach(t => {
+          t.className = 'module-tab-btn px-3 py-1.5 rounded-t-lg font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200';
+        });
+        tab.className = 'module-tab-btn px-3 py-1.5 rounded-t-lg font-semibold border-b-2 border-amber-500 text-amber-400 bg-slate-800';
+
+        document.querySelectorAll('.module-panel').forEach(p => p.classList.add('hidden'));
+        const targetPanel = document.getElementById(tab.dataset.module);
+        if (targetPanel) targetPanel.classList.remove('hidden');
+      });
+    });
+
+    // Lick Trainer Controls
+    document.getElementById('lickSelect').addEventListener('change', (e) => {
+      appState.activeLickId = e.target.value;
+      appState.activeStepIndex = -1;
+      updateLickDisplay();
+    });
+
+    document.getElementById('btnPlayLick').addEventListener('click', playLickSequence);
+
+    document.querySelectorAll('.speed-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.speed-btn').forEach(b => {
+          b.className = 'speed-btn px-2 py-1 rounded text-slate-400 hover:text-white';
+        });
+        btn.className = 'speed-btn px-2 py-1 rounded bg-amber-600 text-slate-950 shadow';
+        appState.lickSpeedMultiplier = parseFloat(btn.dataset.speed);
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      renderFretboard();
+    });
+
+    window.onload = () => {
+      renderApp();
+    };
+  </script>
+</body>
+</html>
